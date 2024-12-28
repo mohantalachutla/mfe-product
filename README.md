@@ -1,6 +1,6 @@
-# mfe-starter-react
+# mfe-product-react
 
-The is a react mfe starter app
+The is a react mfe product app
 
 
 ## Installation
