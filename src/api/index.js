@@ -27,3 +27,23 @@ export const changeStatus = ({ _id, status }) => {
     status,
   });
 };
+
+export const orderProducts = ({ items, address } = {}) => {
+  return httpClient.post('/api/order', {
+    items,
+    address,
+  });
+};
+
+export const addToCart = ({ items, archivedItems } = {}) => {
+  return httpClient.post('/api/cart', {
+    items,
+    archivedItems,
+  });
+};
+
+export const addToWishlist = ({ items } = {}) => {
+  return httpClient.post('/api/wishlist', {
+    items,
+  });
+};

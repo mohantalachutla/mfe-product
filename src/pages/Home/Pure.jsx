@@ -26,7 +26,7 @@ const ProductPage = ({ products = [] } = props) => {
         </div>
       )}
       {productList.map((product) => (
-        <Product key={product._id} {...product} />
+        <Product key={product._id} {...product} dispatch={dispatch} />
       ))}
       {productList.length > 0 && (
         <Button

@@ -24,3 +24,21 @@ export const changeProductStatusAction = createAction(
     payload,
   })
 );
+
+export const orderProductAction = createAction(
+  'orderProduct/request',
+  (payload) => ({
+    payload,
+  })
+);
+
+export const addToCartAction = createAction('addToCart/request', (payload) => ({
+  payload,
+}));
+
+export const AddToWishlistAction = createAction(
+  'addToWishlist/request',
+  (payload) => ({
+    payload,
+  })
+);
