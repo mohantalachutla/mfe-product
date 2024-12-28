@@ -1,34 +1,43 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import Container from '../../components/base/Container';
-import Row from '../../components/base/Row';
-import Col from '../../components/base/Col';
 import { Product } from '../../components/Product';
 import { useEffect } from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { withStoreWrapper } from 'components/common/StoreWrapper';
-import { helloAction } from '../../actions';
+import { fetchProductsAction } from '../../actions';
+import { Button } from '../../stories/example/Button';
 const ProductPage = ({ products = [] } = props) => {
+  const productList = useSelector(
+    (state) => state?.product?.products || products
+  );
+  const [loadMore, setLoadMore] = React.useState(false);
   const dispatch = useDispatch();
   useEffect(() => {
-    if (products.length === 0) {
-      dispatch(helloAction('john'));
+    if (productList.length === 0 || loadMore) {
+      dispatch(fetchProductsAction({}));
     }
-  }, [dispatch]);
+  }, [dispatch, loadMore, productList.length]);
   return (
     <Container size="md">
-      {products.length === 0 && (
+      {productList.length === 0 && (
         <div className="alert alert-info" role="alert">
           No products found
         </div>
       )}
-      {products.map((product) => (
-        <Row key={product.id}>
-          <Col size="md" offset="12">
-            <Product {...product} />
-          </Col>
-        </Row>
+      {productList.map((product) => (
+        <Product key={product._id} {...product} />
       ))}
+      {productList.length > 0 && (
+        <Button
+          className="btn btn-primary"
+          onClick={() => setLoadMore(true)}
+          label={'Load more'}
+          type="button"
+          primary
+          size="large"
+        />
+      )}
     </Container>
   );
 };
